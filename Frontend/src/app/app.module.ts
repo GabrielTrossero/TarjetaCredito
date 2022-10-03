@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AgregarTarjetaComponent } from './TarjetaCredito/agregar-tarjeta/agregar-tarjeta.component';
 import { ListarTarjetasComponent } from './TarjetaCredito/listar-tarjetas/listar-tarjetas.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { ListarTarjetasComponent } from './TarjetaCredito/listar-tarjetas/listar
     AgregarTarjetaComponent,
     ListarTarjetasComponent,
   ],
-  imports: [BrowserModule, ReactiveFormsModule],
+  imports: [BrowserModule, ReactiveFormsModule, FontAwesomeModule],
   providers: [],
   bootstrap: [AppComponent],
 })

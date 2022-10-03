@@ -1,1 +1,21 @@
-<p>listar-tarjetas works!</p>
+<h5 class="titulo">Listar Tarjetas</h5>
+
+<table class="table">
+  <tbody>
+    <tr *ngFor="let tarjeta of tarjetas; let indice = index">
+      <td>{{ tarjeta.titular }}</td>
+      <td>{{ tarjeta.numTarjeta }}</td>
+      <td>{{ tarjeta.mesAnio }}</td>
+      <td>
+        <i class="boton text-warning">
+          <fa-icon [icon]="faPenToSquare"></fa-icon>
+        </i>
+      </td>
+      <td>
+        <i class="boton text-danger" (click)="onDelete(indice)">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </i>
+      </td>
+    </tr>
+  </tbody>
+</table>
