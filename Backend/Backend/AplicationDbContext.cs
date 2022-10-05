@@ -8,7 +8,7 @@ namespace Backend
     public class AplicationDbContext: DbContext
     {
         //Para mapear nuestros modelos con las tablas de la BD
-        DbSet<TarjetaCredito> TarjetaCredito { get; set; }
+        public DbSet<TarjetaCredito> TarjetaCredito { get; set; }
 
         public AplicationDbContext(DbContextOptions<AplicationDbContext> options): base(options)
         {

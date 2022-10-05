@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Backend.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,24 +14,41 @@ namespace Backend.Controllers
     [ApiController]
     public class TarjetaController : ControllerBase
     {
-        // GET: api/<TarjetaController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+        private readonly AplicationDbContext _context;
+
+        public TarjetaController(AplicationDbContext context) { 
+            _context = context;
         }
 
-        // GET api/<TarjetaController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET: api/<TarjetaController>
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
-            return "value";
+            try
+            {
+                var listTarjetas = await _context.TarjetaCredito.ToListAsync();//para que le reconozca que el método va a ser asyncrono
+                return Ok(listTarjetas); //return status 200
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message); //devuelvo un 404
+            }
         }
 
         // POST api/<TarjetaController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] TarjetaCredito tarjeta)
         {
+            try
+            {
+                _context.Add(tarjeta);
+                await _context.SaveChangesAsync();
+                return Ok(tarjeta);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message); //devuelvo un 404
+            }
         }
 
         // PUT api/<TarjetaController>/5
