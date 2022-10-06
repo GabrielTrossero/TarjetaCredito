@@ -14,4 +14,8 @@ export class TarjetaService {
   getListTarjetas(): Observable<any> {
     return this.httpClient.get(this.myAppUrl + this.myApiUrl);
   }
+
+  deleteTarjeta(id: number): Observable<any> {
+    return this.httpClient.delete(this.myAppUrl + this.myApiUrl + id);
+  }
 }

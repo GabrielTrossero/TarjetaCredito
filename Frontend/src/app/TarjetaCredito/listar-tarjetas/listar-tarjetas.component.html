@@ -2,7 +2,7 @@
 
 <table class="table">
   <tbody>
-    <tr *ngFor="let tarjeta of tarjetas; let indice = index">
+    <tr *ngFor="let tarjeta of tarjetas">
       <td>{{ tarjeta.titular }}</td>
       <td>{{ tarjeta.numeroTarjeta }}</td>
       <td>{{ tarjeta.fechaExpiracion }}</td>
@@ -12,7 +12,7 @@
         </i>
       </td>
       <td>
-        <i class="boton text-danger" (click)="onDelete(indice)">
+        <i class="boton text-danger" (click)="onDelete(tarjeta.id)">
           <fa-icon [icon]="faTrash"></fa-icon>
         </i>
       </td>

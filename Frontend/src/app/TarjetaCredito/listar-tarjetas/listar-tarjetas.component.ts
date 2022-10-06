@@ -34,7 +34,15 @@ export class ListarTarjetasComponent implements OnInit {
     );
   }
 
-  onDelete(index: number) {
-    this.tarjetas.splice(index, 1);
+  onDelete(id: number) {
+    this.tarjetaService.deleteTarjeta(id).subscribe(
+      (data) => {
+        console.log('Tarjeta borrada correctamente');
+        this.obtenerTarjetas(); //Tengo que actualizar la lista de tarjetas
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
