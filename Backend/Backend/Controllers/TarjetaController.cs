@@ -53,14 +53,50 @@ namespace Backend.Controllers
 
         // PUT api/<TarjetaController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] TarjetaCredito tarjeta)
         {
+            try
+            {
+                if(id == tarjeta.Id)
+                {
+                    _context.Update(tarjeta);
+                    await _context.SaveChangesAsync();
+                    return Ok(new {message = "La tarjeta fue actualizada con éxito"});
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message); //devuelvo un 404
+            }
         }
 
         // DELETE api/<TarjetaController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                var tarjeta = await _context.TarjetaCredito.FindAsync(id);
+                
+                if (tarjeta != null)
+                {
+                    _context.Remove(tarjeta);
+                    await _context.SaveChangesAsync();
+                    return Ok(new { message = "La tarjeta fue eliminada con éxito" });
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message); //devuelvo un 404
+            }
         }
     }
 }
