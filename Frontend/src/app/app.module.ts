@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AgregarTarjetaComponent } from './TarjetaCredito/agregar-tarjeta/agregar-tarjeta.component';
@@ -13,7 +14,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AgregarTarjetaComponent,
     ListarTarjetasComponent,
   ],
-  imports: [BrowserModule, ReactiveFormsModule, FontAwesomeModule],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

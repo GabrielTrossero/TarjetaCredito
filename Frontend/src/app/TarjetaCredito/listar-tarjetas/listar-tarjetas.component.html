@@ -4,8 +4,8 @@
   <tbody>
     <tr *ngFor="let tarjeta of tarjetas; let indice = index">
       <td>{{ tarjeta.titular }}</td>
-      <td>{{ tarjeta.numTarjeta }}</td>
-      <td>{{ tarjeta.mesAnio }}</td>
+      <td>{{ tarjeta.numeroTarjeta }}</td>
+      <td>{{ tarjeta.fechaExpiracion }}</td>
       <td>
         <i class="boton text-warning">
           <fa-icon [icon]="faPenToSquare"></fa-icon>

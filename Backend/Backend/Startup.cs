@@ -36,6 +36,12 @@ namespace Backend
 
             services.AddDbContext<AplicationDbContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+
+            //Cors es para permitir que el front se conecte al back
+            services.AddCors(options => options.AddPolicy("AllowWebApp",
+                                  builder => builder.AllowAnyOrigin()
+                                                    .AllowAnyMethod()
+                                                    .AllowAnyOrigin()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +53,7 @@ namespace Backend
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Backend v1"));
             }
+            app.UseCors("AllowWebApp");
 
             app.UseHttpsRedirection();
 
