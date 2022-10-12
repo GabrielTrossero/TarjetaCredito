@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Tarjeta } from 'src/app/Models/tarjeta.model';
+import { TarjetaService } from 'src/app/servies/tarjeta.service';
 
 @Component({
   selector: 'app-agregar-tarjeta',
@@ -10,14 +11,14 @@ import { Tarjeta } from 'src/app/Models/tarjeta.model';
 export class AgregarTarjetaComponent implements OnInit {
   formulario: FormGroup;
 
-  @Output() newTarjeta: EventEmitter<Tarjeta>;
+  //@Output() newTarjeta: EventEmitter<Tarjeta>;
 
-  constructor() {
-    this.newTarjeta = new EventEmitter();
+  constructor(private tarjetaService: TarjetaService) {
+    //this.newTarjeta = new EventEmitter();
     this.formulario = new FormGroup({
       titular: new FormControl(),
-      numTarjeta: new FormControl(),
-      mesAnio: new FormControl(),
+      numeroTarjeta: new FormControl(),
+      fechaExpiracion: new FormControl(),
       CVV: new FormControl(),
     });
   }
@@ -25,6 +26,14 @@ export class AgregarTarjetaComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    this.newTarjeta.emit(this.formulario.value);
+    //this.newTarjeta.emit(this.formulario.value);
+    this.tarjetaService.saveTarjeta(this.formulario.value).subscribe(
+      (data) => {
+        console.log(this.formulario.value);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

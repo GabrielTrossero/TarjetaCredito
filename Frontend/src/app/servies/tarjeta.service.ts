@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Tarjeta } from '../Models/tarjeta.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,5 +18,9 @@ export class TarjetaService {
 
   deleteTarjeta(id: number): Observable<any> {
     return this.httpClient.delete(this.myAppUrl + this.myApiUrl + id);
+  }
+
+  saveTarjeta(tarjeta: Tarjeta): Observable<any> {
+    return this.httpClient.post(this.myAppUrl + this.myApiUrl, tarjeta);
   }
 }

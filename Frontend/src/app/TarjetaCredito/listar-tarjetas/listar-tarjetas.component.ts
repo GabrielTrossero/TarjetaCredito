@@ -13,7 +13,8 @@ export class ListarTarjetasComponent implements OnInit {
   faPenToSquare = faPenToSquare;
   faTrash = faTrash;
 
-  @Input() tarjetas: Tarjeta[];
+  //@Input() tarjetas: Tarjeta[];
+  tarjetas: Tarjeta[];
 
   constructor(private tarjetaService: TarjetaService) {
     this.tarjetas = [];
