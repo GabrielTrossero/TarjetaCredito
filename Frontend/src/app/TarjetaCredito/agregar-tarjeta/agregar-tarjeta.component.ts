@@ -11,10 +11,11 @@ import { TarjetaService } from 'src/app/servies/tarjeta.service';
 export class AgregarTarjetaComponent implements OnInit {
   formulario: FormGroup;
 
-  //@Output() newTarjeta: EventEmitter<Tarjeta>;
+  @Output() newTarjeta: EventEmitter<Tarjeta>;
 
   constructor(private tarjetaService: TarjetaService) {
-    //this.newTarjeta = new EventEmitter();
+    this.newTarjeta = new EventEmitter();
+
     this.formulario = new FormGroup({
       titular: new FormControl(),
       numeroTarjeta: new FormControl(),
@@ -26,14 +27,6 @@ export class AgregarTarjetaComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    //this.newTarjeta.emit(this.formulario.value);
-    this.tarjetaService.saveTarjeta(this.formulario.value).subscribe(
-      (data) => {
-        console.log(this.formulario.value);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.newTarjeta.emit(this.formulario.value);
   }
 }

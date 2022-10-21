@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Tarjeta } from 'src/app/Models/tarjeta.model';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TarjetaService } from 'src/app/servies/tarjeta.service';
@@ -13,37 +13,17 @@ export class ListarTarjetasComponent implements OnInit {
   faPenToSquare = faPenToSquare;
   faTrash = faTrash;
 
-  //@Input() tarjetas: Tarjeta[];
-  tarjetas: Tarjeta[];
+  @Input() tarjetas: Tarjeta[];
+  @Output() deleteTarjeta: EventEmitter<number>;
 
   constructor(private tarjetaService: TarjetaService) {
     this.tarjetas = [];
+    this.deleteTarjeta = new EventEmitter();
   }
 
-  ngOnInit(): void {
-    this.obtenerTarjetas();
-  }
-
-  obtenerTarjetas() {
-    this.tarjetaService.getListTarjetas().subscribe(
-      (data) => {
-        this.tarjetas = data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+  ngOnInit(): void {}
 
   onDelete(id: number) {
-    this.tarjetaService.deleteTarjeta(id).subscribe(
-      (data) => {
-        console.log('Tarjeta borrada correctamente');
-        this.obtenerTarjetas(); //Tengo que actualizar la lista de tarjetas
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.deleteTarjeta.emit(id);
   }
 }

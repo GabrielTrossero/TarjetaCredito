@@ -14,10 +14,9 @@
     <div class="col-lg-5">
       <div class="card">
         <div class="card-body">
-          <!--<app-agregar-tarjeta
-            (newTarjeta)="onNewTarjeta($event)"
-          ></app-agregar-tarjeta>-->
-          <app-agregar-tarjeta></app-agregar-tarjeta>
+          <app-agregar-tarjeta
+            (newTarjeta)="nuevaTarjeta($event)"
+          ></app-agregar-tarjeta>
         </div>
       </div>
     </div>
@@ -25,8 +24,10 @@
     <div class="col-lg-7">
       <div class="card">
         <div class="card-body">
-          <!--<app-listar-tarjetas [tarjetas]="arrayTarjetas"></app-listar-tarjetas>-->
-          <app-listar-tarjetas></app-listar-tarjetas>
+          <app-listar-tarjetas
+            [tarjetas]="arrayTarjetas"
+            (deleteTarjeta)="borrarTarjeta($event)"
+          ></app-listar-tarjetas>
         </div>
       </div>
     </div>
