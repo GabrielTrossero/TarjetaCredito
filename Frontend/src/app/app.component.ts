@@ -30,8 +30,28 @@ export class AppComponent {
     );
   }
 
-  nuevaTarjeta($event: Tarjeta) {
-    this.tarjetaService.saveTarjeta($event).subscribe(
+  sendTarjeta($event: any) {
+    console.log($event);
+    if ($event.id) {
+      this.actualizarTarjeta($event);
+    } else {
+      this.nuevaTarjeta($event);
+    }
+  }
+
+  nuevaTarjeta($event: any) {
+    this.tarjetaService.saveTarjeta($event.tarjeta).subscribe(
+      (data) => {
+        this.obtenerTarjetas(); //actualizo la lista de tarjetas
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  actualizarTarjeta($event: any) {
+    this.tarjetaService.updateTarjeta($event.id, $event.tarjeta).subscribe(
       (data) => {
         this.obtenerTarjetas(); //actualizo la lista de tarjetas
       },

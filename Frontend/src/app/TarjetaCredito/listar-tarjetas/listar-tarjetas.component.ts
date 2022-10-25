@@ -15,13 +15,20 @@ export class ListarTarjetasComponent implements OnInit {
 
   @Input() tarjetas: Tarjeta[];
   @Output() deleteTarjeta: EventEmitter<number>;
+  @Output() updateTarjeta: EventEmitter<Tarjeta>;
 
   constructor(private tarjetaService: TarjetaService) {
     this.tarjetas = [];
     this.deleteTarjeta = new EventEmitter();
+    this.updateTarjeta = new EventEmitter();
   }
 
   ngOnInit(): void {}
+
+  onUpdate(tarjeta: Tarjeta) {
+    //this.updateTarjeta.emit(tarjeta);
+    this.tarjetaService.tarjetaUpdate$.emit(tarjeta);
+  }
 
   onDelete(id: number) {
     this.deleteTarjeta.emit(id);

@@ -3,13 +3,13 @@ export class Tarjeta {
   titular: string;
   numeroTarjeta: string;
   fechaExpiracion: string;
-  CVV: string;
+  cvv: string;
 
   constructor(pTitular = '', pNumTarjeta = '', pMesAnio = '', pCVV = '') {
     this.id = 0;
     this.titular = pTitular;
     this.numeroTarjeta = pNumTarjeta;
     this.fechaExpiracion = pMesAnio;
-    this.CVV = pCVV;
+    this.cvv = pCVV;
   }
 }

@@ -7,7 +7,7 @@
       <td>{{ tarjeta.numeroTarjeta }}</td>
       <td>{{ tarjeta.fechaExpiracion }}</td>
       <td>
-        <i class="boton text-warning">
+        <i class="boton text-warning" (click)="onUpdate(tarjeta)">
           <fa-icon [icon]="faPenToSquare"></fa-icon>
         </i>
       </td>

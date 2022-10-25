@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Tarjeta } from '../Models/tarjeta.model';
 
@@ -9,6 +9,9 @@ import { Tarjeta } from '../Models/tarjeta.model';
 export class TarjetaService {
   private myAppUrl = 'https://localhost:44389/';
   private myApiUrl = 'api/tarjeta/';
+
+  //evento que comunica los componentes listar y agregar
+  tarjetaUpdate$ = new EventEmitter<Tarjeta>();
 
   constructor(private httpClient: HttpClient) {}
 
@@ -22,5 +25,10 @@ export class TarjetaService {
 
   saveTarjeta(tarjeta: Tarjeta): Observable<any> {
     return this.httpClient.post(this.myAppUrl + this.myApiUrl, tarjeta);
+  }
+
+  updateTarjeta(id: number, tarjeta: Tarjeta): Observable<any> {
+    tarjeta.id = id;
+    return this.httpClient.put(this.myAppUrl + this.myApiUrl + id, tarjeta);
   }
 }
